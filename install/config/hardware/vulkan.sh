@@ -1,3 +1,4 @@
+#!/bin/bash
 # Install Vulkan drivers matching detected GPU hardware
 # (NVIDIA Vulkan is handled by nvidia.sh via nvidia-utils)
 
