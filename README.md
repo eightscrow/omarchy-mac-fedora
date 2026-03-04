@@ -74,12 +74,8 @@ Use one of these methods from your Fedora Asahi session before running the insta
 # Check network devices
 nmcli device status
 
-# Scan and list Wi-Fi networks (replace wlan0 if needed)
-nmcli device wifi rescan ifname wlan0
-nmcli device wifi list ifname wlan0
-
 # Connect to a network
-nmcli device wifi connect "SSID_NAME" password "PASSWORD" ifname wlan0
+nmcli device wifi connect "SSID_NAME" password "PASSWORD"
 ```
 
 ### Option 2: `iwctl` (iwd)
