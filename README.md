@@ -102,6 +102,7 @@ sudo setfont ter-v22n
 As your regular sudo user:
 
 ```bash
+sudo dnf update
 git clone https://github.com/malik-na/omarchy-mac-fedora.git ~/.local/share/omarchy
 cd ~/.local/share/omarchy
 bash install.sh
