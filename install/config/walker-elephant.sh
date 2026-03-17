@@ -15,19 +15,20 @@ if command -v omarchy-refresh-walker >/dev/null 2>&1; then
   omarchy-refresh-walker || true
 fi
 
-if command -v elephant >/dev/null 2>&1; then
+if [ -x "$HOME/.local/bin/elephant" ] || command -v elephant >/dev/null 2>&1; then
   elephant service enable || true
 
   cat >~/.config/systemd/user/elephant.service.d/20-exec.conf <<EOF
 [Service]
 ExecStart=
-ExecStart=$HOME/.local/bin/elephant
+ExecStart=%h/.local/bin/elephant
 EOF
 
   cat >~/.config/systemd/user/elephant.service.d/30-path.conf <<EOF
 [Service]
-Environment=PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PATH=$OMARCHY_PATH/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin
 EOF
 
   systemctl --user daemon-reload || true
+  systemctl --user restart elephant.service || true
 fi
