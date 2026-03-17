@@ -17,4 +17,17 @@ fi
 
 if command -v elephant >/dev/null 2>&1; then
   elephant service enable || true
+
+  cat >~/.config/systemd/user/elephant.service.d/20-exec.conf <<EOF
+[Service]
+ExecStart=
+ExecStart=$HOME/.local/bin/elephant
+EOF
+
+  cat >~/.config/systemd/user/elephant.service.d/30-path.conf <<EOF
+[Service]
+Environment=PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin
+EOF
+
+  systemctl --user daemon-reload || true
 fi
