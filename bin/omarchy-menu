@@ -79,6 +79,7 @@ menu() {
   else
     args+=(--width 295)
   fi
+  args+=(--minheight 1 --maxheight 630)
 
   # Walker returns empty string on esc/cancel
   local choice
