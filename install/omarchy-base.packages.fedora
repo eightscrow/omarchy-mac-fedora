@@ -77,6 +77,9 @@ gum
 plymouth
 cups
 snapper
+btrfs-assistant
+python3-dnf-plugin-snapper
+inotify-tools
 ImageMagick
 firewalld
 python3-pip
