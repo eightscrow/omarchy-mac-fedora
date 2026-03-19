@@ -5,7 +5,7 @@ has_snapper_config() {
   sudo snapper --csvout list-configs 2>/dev/null | awk -F, 'NR>1 {print $1}' | grep -qx "$config_name"
 }
 
-if [[ ! -x /etc/grub.d/41_snapshots-btrfs ]]; then
+if ! sudo test -x /etc/grub.d/41_snapshots-btrfs; then
   echo "[SKIP] grub-btrfs script is missing; skipping GRUB snapshot integration"
   exit 0
 fi

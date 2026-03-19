@@ -11,7 +11,7 @@ if ! command -v git >/dev/null 2>&1; then
   echo "[INFO] Installing git for grub-btrfs build"
   sudo dnf install -y git || {
     echo "[WARN] Failed to install git"
-    exit 0
+    exit 1
   }
 fi
 
@@ -19,7 +19,7 @@ if ! command -v make >/dev/null 2>&1; then
   echo "[INFO] Installing make for grub-btrfs build"
   sudo dnf install -y make || {
     echo "[WARN] Failed to install make"
-    exit 0
+    exit 1
   }
 fi
 
@@ -27,7 +27,7 @@ if ! rpm -q inotify-tools >/dev/null 2>&1; then
   echo "[INFO] Installing inotify-tools"
   sudo dnf install -y inotify-tools || {
     echo "[WARN] Failed to install inotify-tools"
-    exit 0
+    exit 1
   }
 fi
 
@@ -37,12 +37,12 @@ trap 'rm -rf "$tmpdir"' EXIT
 echo "[Omarchy/Fedora] Installing grub-btrfs from upstream..."
 if ! git clone --depth=1 https://github.com/Antynea/grub-btrfs.git "$tmpdir/grub-btrfs"; then
   echo "[WARN] Failed to clone grub-btrfs"
-  exit 0
+  exit 1
 fi
 
-if ! (cd "$tmpdir/grub-btrfs" && sudo make install); then
+if ! (cd "$tmpdir/grub-btrfs" && sudo make GRUB_UPDATE_EXCLUDE=true install); then
   echo "[WARN] Failed to install grub-btrfs"
-  exit 0
+  exit 1
 fi
 
 config_file="/etc/default/grub-btrfs/config"
